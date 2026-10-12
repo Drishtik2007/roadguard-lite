@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d18">
+  <title>RoadGuard Lite | Road Intelligence</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#overview">
+      <span class="brand-mark">RG<span>+</span></span>
+      <span class="brand-name">ROADGUARD<small>ROAD INTELLIGENCE</small></span>
+    </a>
+    <div class="nav-label">WORKSPACE</div>
+    <a class="nav active" href="#overview"><span>▦</span> Overview</a>
+    <a class="nav" href="#monitor"><span>⌖</span> Road monitor</a>
+    <a class="nav" href="#reports"><span>≡</span> Hazard reports</a>
+    <div class="sidebar-bottom">
+      <div class="system-pill"><i></i> PROTOTYPE ONLINE</div>
+      <div class="side-caption">ROADGUARD LITE <b>v1.0</b></div>
+      <p>Community-powered road safety</p>
+    </div>
+  </aside>
+
+  <main class="main" id="overview">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow"><span class="eyebrow-line"></span> MOBILITY INTELLIGENCE / INDIA</div>
+        <h1>Road Intelligence <span>Center</span></h1>
+        <p class="subtitle">See risk sooner. Prioritize smarter. Make roads safer.</p>
+      </div>
+      <button class="button primary" id="openReport"><span>＋</span> Report a hazard</button>
+    </header>
+
+    <div class="statusbar">
+      <span><i class="status-dot"></i> LOCAL MONITORING ACTIVE</span>
+      <span id="todayLabel">ROAD SAFETY DASHBOARD</span>
+      <span class="demo-label">DEMO ENVIRONMENT</span>
+    </div>
+
+    <section class="metrics">
+      <article class="metric">
+        <div class="metric-head">TOTAL REPORTS <span class="metric-symbol blue">▤</span></div>
+        <div class="metric-value" id="totalReports">0</div>
+        <div class="metric-foot">Community-submitted hazards</div>
+        <div class="metric-glow"></div>
+      </article>
+      <article class="metric">
+        <div class="metric-head">OPEN HAZARDS <span class="metric-symbol amber">⚠</span></div>
+        <div class="metric-value" id="openReports">0</div>
+        <div class="metric-foot">Require further attention</div>
+        <div class="metric-glow amber-glow"></div>
+      </article>
+      <article class="metric">
+        <div class="metric-head">HIGH PRIORITY <span class="metric-symbol red">⬡</span></div>
+        <div class="metric-value" id="highReports">0</div>
+        <div class="metric-foot">High-risk reports still open</div>
+        <div class="metric-glow red-glow"></div>
+      </article>
+      <article class="metric">
+        <div class="metric-head">RESOLVED <span class="metric-symbol green">✓</span></div>
+        <div class="metric-value" id="resolvedReports">0</div>
+        <div class="metric-foot">Marked resolved in this demo</div>
+        <div class="metric-glow green-glow"></div>
+      </article>
+    </section>
+
+    <section class="content-grid">
+      <article class="panel map-panel" id="monitor">
+        <div class="panel-heading">
+          <div><div class="eyebrow">SPATIAL OVERVIEW</div><h2>Road Risk Monitor</h2></div>
+          <span class="live-badge"><i></i> DEMO MAP</span>
+        </div>
+        <div class="map-canvas">
+          <div class="map-grid"></div>
+          <svg class="road-svg" viewBox="0 0 800 430" preserveAspectRatio="none">
+            <g class="minor-roads">
+              <path d="M-20 50 L190 110 L355 70 L525 145 L820 75"/>
+              <path d="M10 370 L190 300 L340 350 L540 260 L810 335"/>
+              <path d="M110 -20 L220 120 L190 300 L260 450"/>
+              <path d="M330 -20 L355 70 L340 350 L390 450"/>
+              <path d="M560 -20 L525 145 L540 260 L650 450"/>
+              <path d="M-20 205 L220 120 L430 210 L700 180 L820 230"/>
+            </g>
+            <g class="main-roads">
+              <path d="M-30 330 L220 120 L430 210 L700 180 L830 65"/>
+              <path d="M110 -25 L220 120 L430 210 L540 260 L670 455"/>
+              <path d="M330 -20 L355 70 L430 210 L340 450"/>
+              <path d="M-20 205 L220 120 L355 70 L525 145 L820 230"/>
+            </g>
+            <g class="road-centres">
+              <path d="M-30 330 L220 120 L430 210 L700 180 L830 65"/>
+              <path d="M110 -25 L220 120 L430 210 L540 260 L670 455"/>
+              <path d="M330 -20 L355 70 L430 210 L340 450"/>
+              <path d="M-20 205 L220 120 L355 70 L525 145 L820 230"/>
+            </g>
+          </svg>
+          <div class="map-label map-label-one">SECTOR 01</div>
+          <div class="map-label map-label-two">ROAD NETWORK</div>
+          <div class="map-label map-label-three">SECTOR 03</div>
+          <div id="mapMarkers"></div>
+          <div class="map-legend">
+            <span><i class="legend-high"></i> High risk</span>
+            <span><i class="legend-medium"></i> Medium</span>
+            <span><i class="legend-low"></i> Low risk</span>
+          </div>
+          <div class="map-disclaimer">ILLUSTRATIVE MAP · NOT LIVE GPS</div>
+          <div class="map-crosshair">+</div>
+        </div>
+        <div class="map-footer">
+          <span>◈ &nbsp; Markers are based on submitted reports</span>
+          <button class="link-button" id="viewReports">View reports ↗</button>
+        </div>
+      </article>
+
+      <article class="panel analytics-panel">
+        <div class="panel-heading">
+          <div><div class="eyebrow">RISK ANALYTICS</div><h2>Priority Breakdown</h2></div>
+          <span class="tiny-icon">⌁</span>
+        </div>
+        <p class="muted">Open reports grouped by severity</p>
+        <div id="riskBreakdown"></div>
+        <div class="insight">
+          <span class="insight-icon">!</span>
+          <div><strong>Risk-first response</strong><p>Review high-priority hazards before lower-risk reports.</p></div>
+        </div>
+        <div class="category-title">REPORTED HAZARD TYPES</div>
+        <div id="categoryBreakdown"></div>
+      </article>
+    </section>
+
+    <section class="panel reports-panel" id="reports">
+      <div class="reports-header">
+        <div><div class="eyebrow">COMMUNITY SIGNALS</div><h2>Hazard Intelligence Feed</h2><p class="muted">Search reports and update their status.</p></div>
+        <button class="button secondary" id="exportCsv">↓ Export CSV</button>
+      </div>
+      <div class="toolbar">
+        <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search location or hazard…"></label>
+        <select id="statusFilter" aria-label="Filter status">
+          <option value="All">All statuses</option><option value="Open">Open</option><option value="Resolved">Resolved</option>
+        </select>
+        <select id="severityFilter" aria-label="Filter priority">
+          <option value="All">All priorities</option><option value="High">High</option><option value="Medium">Medium</option><option value="Low">Low</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>HAZARD / LOCATION</th><th>TYPE</th><th>PRIORITY</th><th>STATUS</th><th>REPORTED</th><th>ACTION</th></tr></thead>
+          <tbody id="reportTable"></tbody>
+        </table>
+      </div>
+      <div class="empty-state" id="emptyState" hidden>No matching reports. Try another filter or submit a hazard.</div>
+      <div class="table-footer"><span id="reportCount">0 reports</span><button class="link-button" id="resetDemo">Reset demo data</button></div>
+    </section>
+    <footer>ROADGUARD LITE <span>·</span> COMMUNITY-POWERED ROAD SAFETY <span>·</span> PROTOTYPE</footer>
+  </main>
+
+  <div class="modal-backdrop" id="reportModal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div><div class="eyebrow">COMMUNITY REPORTING</div><h2 id="modalTitle">Report a road hazard</h2><p class="muted">Help flag a road issue for review.</p></div>
+        <button class="close-button" id="closeModal" aria-label="Close dialog">×</button>
+      </div>
+      <form id="reportForm">
+        <label for="location">Location / landmark</label>
+        <input id="location" name="location" maxlength="100" placeholder="e.g. Near college main gate" required>
+        <div class="form-row">
+          <div><label for="hazardType">Hazard type</label><select id="hazardType" name="hazardType"><option>Pothole</option><option>Waterlogging</option><option>Damaged road</option><option>Broken streetlight</option><option>Obstruction</option><option>Other</option></select></div>
+          <div><label for="severity">Risk priority</label><select id="severity" name="severity"><option>High</option><option selected>Medium</option><option>Low</option></select></div>
+        </div>
+        <label for="description">Description (optional)</label>
+        <textarea id="description" name="description" rows="3" maxlength="300" placeholder="Briefly describe the road issue…"></textarea>
+        <div class="form-note">Prototype only: reports are saved in this browser and are not sent to authorities.</div>
+        <button type="submit" class="button primary submit-button">Submit hazard report ↗</button>
+      </form>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
